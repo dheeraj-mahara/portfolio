@@ -43,7 +43,7 @@
 }
 
 
-@keyframes rotateBorder {
+@keyframes rotateBorderinput {
     0% {
         border-image-source: linear-gradient(0deg, cyan, magenta, purple, teal);
         /* box-shadow: 0 0 4px cyan, 0 0 6px magenta, 0 0 8px purple, 0 0 10px teal; */
@@ -79,7 +79,7 @@
 }
 
 .rainbow-border:focus {
-    animation: rotateBorder 3s linear infinite;
+    animation: rotateBorderinput 3s linear infinite;
     border-image-slice: 1;
     outline: none;
 }
