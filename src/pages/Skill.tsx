@@ -1,5 +1,8 @@
 import { FaReact, FaJs, FaNodeJs, FaGitAlt, FaGithub, FaPaintBrush, FaSketch } from "react-icons/fa";
 import { SiTailwindcss, SiTypescript, SiExpress, SiMongodb, SiSocketdotio, SiMysql, SiFigma, } from "react-icons/si";
+import frountendImg from "../assets/frountend.png";
+import backendImg from "../assets/backend.png";
+import skillBg from "../assets/skillbg.png";
 
 import { motion } from "framer-motion";
 const leftCard = {
@@ -67,14 +70,10 @@ export default function Skill() {
         <section className="relative min-h-screen bg-[#070B1A] text-white overflow-hidden py-6  md:py-4 sm:py-20">
 
             {/* Background Image */}
+
             <div className="absolute inset-0">
-                <motion.img
-                    animate={{ y: [0, -8, 0] }}
-                    transition={{
-                        duration: 3,
-                        repeat: Infinity
-                    }}
-                    src="src/assets/skillbg.png"
+                <img
+                    src={skillBg}
                     alt="bg"
                     className="w-full h-full object-cover"
                 />
@@ -123,7 +122,7 @@ export default function Skill() {
 
                                 <div className="w-[40%]">
                                     <img
-                                        src="src/assets/frountend.png"
+                                        src={frountendImg}
                                         alt="Frontend"
                                         className="rounded-lg object-cover w-full"
                                     />
@@ -177,14 +176,10 @@ export default function Skill() {
                         <div className="bg-white/10 rounded-2xl md:p-5 p-2 border border-sky-300/40 outline-none mt-4 shadow-[0_0_5px_rgba(56,189,248,0.6)]  transition duration-300  shadow-[0_-8px_12px_rgba(56,189,248,0.35)]  hover:shadow-[0_0_18px_rgba(56,189,248,0.55)]">
                             <div className="flex flex-row items-center gap-5">
 
-                                <div className="w-[40%]">
-                                    <motion.img
-                                        animate={{ y: [0, -8, 0] }}
-                                        transition={{
-                                            duration: 3,
-                                            repeat: Infinity
-                                        }}
-                                        src="src/assets/backend.png"
+                                
+                                 <div className="w-[40%]">
+                                    <img
+                                        src={backendImg}
                                         alt="Frontend"
                                         className="rounded-lg object-cover w-full"
                                     />
@@ -222,19 +217,19 @@ export default function Skill() {
                 <div className="max-w-fit mt-2 pb-2 md:pb-6y md:mt-0 mt-7">
                     <h2 className="text-2xl text-white/90 font-semibold mb-4">Additional Skills</h2>
 
-<motion.div
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  className="bg-white/10 max-w-fit border border-indigo-400/60 rounded-2xl p-2 md:p-6 flex flex-wrap gap-3 shadow-lg shadow-indigo-500/20 transition"
->                        {tools.map((item) => (
-                            <span
-                                key={item.name}
-                                className="flex cursor-default items-center gap-1 px-3 py-1 md:text-sm  text-xs rounded-full  border border-indigo-400/30 transition shadow-[0_0_8px_rgba(99,102,241,0.25)] bg-indigo-500/30 hover:shadow-[0_0_14px_rgba(99,102,241,0.5)]"                            >
-                                {item.icon}
-                                {item.name}
-                            </span>
-                        ))}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="bg-white/10 max-w-fit border border-indigo-400/60 rounded-2xl p-2 md:p-6 flex flex-wrap gap-3 shadow-lg shadow-indigo-500/20 transition"
+                    >                        {tools.map((item) => (
+                        <span
+                            key={item.name}
+                            className="flex cursor-default items-center gap-1 px-3 py-1 md:text-sm  text-xs rounded-full  border border-indigo-400/30 transition shadow-[0_0_8px_rgba(99,102,241,0.25)] bg-indigo-500/30 hover:shadow-[0_0_14px_rgba(99,102,241,0.5)]"                            >
+                            {item.icon}
+                            {item.name}
+                        </span>
+                    ))}
                     </motion.div>
                 </div>
 

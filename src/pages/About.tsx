@@ -1,6 +1,8 @@
 import { SiReact, SiTypescript, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, } from "react-icons/si";
 import { FaCode, FaServer, FaHandSparkles } from "react-icons/fa";
 import { motion } from "framer-motion";
+import heroImg from "../assets/hero.png";
+import aboutBg from "../assets/aboutbg.png";
 
 const skills = [
   // Frontend
@@ -57,7 +59,7 @@ export default function About() {
       {/* Background Gradient */}
       <div className="absolute inset-0">
         <img
-          src="src/assets/aboutbg.png"
+          src={aboutBg}
           alt="bg"
           className="w-full h-full object-cover"
         />
@@ -157,38 +159,35 @@ export default function About() {
               <div className="relative z-10">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500 to-blue-500 blur-xl opacity-40"></div>
 
-               <motion.img
-  src="src/assets/hero.png"
-  alt="profile"
-  className="relative h-48 sm:h-60 lg:h-64 object-cover rounded-2xl"
-  animate={{ y: [0, -10, 0] }}
-  transition={{
-    duration: 3,
-    repeat: Infinity,
-    ease: "easeInOut"
-  }}
-/>
+                <motion.img
+                  src={heroImg}
+                  alt="profile"
+                  className="relative h-48 sm:h-60 lg:h-64 object-cover rounded-2xl"
+
+                />
               </div>
 
               {/* Content */}
               <div className="text-center sm:text-left z-10 hidden md:block ">
 
-                <div className="tracking-wide">
+
+                <div className="tracking-wide md:w-60">
                   <h3 className="text-xl lg:text-2xl text-gray-200 font-semibold">
-                    <span className="text-orange-300"> 0 Years </span> Experience
+                    <span className="text-orange-300"> Since 2025 </span>  Building My Future in Tech
                   </h3>
 
-                  <p className="text-lg font-semibold text-gray-200">
-                    Full Stack Developer
-                  </p>
+
 
                   <p className="text-gray-400 text-sm py-2">
+                    Focused on Skills, Growth & Real-World Impact
+                  </p>
+                  <p className="text-gray-400 text-sm py-1">
                     2026 - Present
                   </p>
                 </div>
 
                 {/* Skills box */}
-                <div className="mt-4 bg-white/5 border border-white/10 rounded-xl p-4">
+                <div className="mt-4 bg-white/5 border border-white/10 rounded-xl p-3">
                   <h4 className="mb-3 text-lg text-gray-300 font-semibold">
                     Skills
                   </h4>
@@ -245,13 +244,18 @@ export default function About() {
             </motion.div>
 
             <div className="md:hidden  mt-6 flex-col items-center flex justify-center sm:justify-start gap-2 flex-wrap">
-              <p className="text-gray-300 self-start pl-4 pb-1">Profile Developer</p>
-              <div className="flex w-full justify-around">
+              <p className="text-gray-300 self-start pl-4 ">Fullstuck Developer</p>
+              <p className="mt-4 text-gray-400 md:hidden flex leading-relaxed text-base lg:text-lg">
+                I'm a full stack developer with a passion for building scalable web
+                applications using modern tech stacks. I enjoy transforming ideas
+                into real-world products.
+              </p>
+              <div className="flex w-full pt-2 justify-around">
                 <span className="px-7 font-bold py-2 bg-blue-500/20 rounded-full text-sm">
-                  Tailwind
+                  Frontend
                 </span>
                 <span className="px-7 font-bold py-2 bg-purple-500/20 rounded-full text-sm">
-                  React
+                  Backend
                 </span>
               </div>
             </div>

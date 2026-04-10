@@ -1,4 +1,5 @@
 import About from "./pages/About"
+import AIChat from "./pages/AIChat"
 import Contact from "./pages/Contact"
 import Footer from "./pages/Footer"
 import FooterNav from "./pages/FooterNav"
@@ -29,6 +30,7 @@ function App() {
       </section>
       <FooterNav />
       <Footer/>
+      <AIChat />
     </div>
 
   )

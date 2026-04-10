@@ -1,4 +1,4 @@
-
+import heroImg from "../assets/hero.png";
 import { motion } from "framer-motion";
 export default function Nav() {
   const navVariant = {
@@ -39,7 +39,6 @@ export default function Nav() {
           animate="show"
           transition={{ staggerChildren: 0.1 }}
           className="hidden md:flex gap-8 text-gray-300 font-medium">
-
 
 
           <motion.li
@@ -101,12 +100,9 @@ export default function Nav() {
         {/* RIGHT ICONS */}
         <div className="flex items-center gap-3">
 
-          {/* <button className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white/10">
-            🔍
-          </button> */}
 
           <button className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white/10">
-            <img src="src\assets\d1.png" alt="" />
+            <img src={heroImg} alt="" />
           </button>
 
         </div>

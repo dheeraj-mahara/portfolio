@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
+import heroImg from "../assets/hero.png";
+import heroBg from "../assets/herobg.png";
+
 
 type FallingTextProps =
     {
@@ -110,7 +113,7 @@ const Home = () => {
             {/* BG */}
             <div className="absolute inset-0">
                 <img
-                    src="src/assets/herobg.png"
+                    src={heroBg}
                     alt="bg"
                     className="w-full h-full object-cover"
                 />
@@ -218,7 +221,7 @@ const Home = () => {
                     <div className="absolute w-[250px] h-[250px] bg-blue-500 blur-[120px] opacity-20"></div>
 
                     <motion.img
-                        src="src/assets/hero.png"
+                        src={heroImg}
                         alt="hero"
                         className="w-full max-w-[500px] h-auto object-contain"
                         initial={{ y: 20 }}

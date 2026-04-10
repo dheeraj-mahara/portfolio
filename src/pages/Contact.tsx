@@ -1,6 +1,8 @@
 import { FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { MdEmail, MdLocationOn } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
+import contectBg from "../assets/contectbg.png";
+import heroImg from "../assets/hero.png";
 
 import { motion } from "framer-motion";
 const formContainer = {
@@ -35,7 +37,7 @@ const Contact = () => {
 
             <div className="absolute inset-0">
                 <img
-                    src="src/assets/contectbg.png"
+                    src={contectBg}
                     alt="bg"
                     className="w-full h-full object-cover"
                 />
@@ -144,14 +146,10 @@ const Contact = () => {
                         className="w-full md:w-[50%] h-fit self-center bg-white/5 backdrop-blur-l p-6 rounded-2xl md:border-t md:border-l md:border-r border-pink-500/40 flex flex-col md:flex-col lg:flex-row items-center gap-3 md:gap-6 md:shadow-[0_0_6px_rgba(236,72,153,0.4),0_0_20px_rgba(236,72,153,0.3)]"
                     >                        {/* Avatar */}
                         <motion.img
-                            src="/src/assets/hero.png"
+                            src={heroImg}
                             alt="avatar"
                             className="w-60 h-60 object-contain md:block hidden shadow-md"
-                            animate={{ y: [0, -12, 0] }}
-                            transition={{
-                                duration: 3,
-                                repeat: Infinity
-                            }}
+                           
                         />
 
                         {/* Content */}

@@ -1,5 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import projectBg from "../assets/projectbg.png";
+import portfoiliImg from "../assets/portfolio.png";
+import gameImg from "../assets/snake.png";
+import chatAppImg from "../assets/chat.png";
+
 
 const container = {
   hidden: {},
@@ -25,7 +30,20 @@ const heading = {
   show: { opacity: 1, y: 0 }
 };
 export default function Projects() {
-  const [active, setActive] = useState("All");
+  const [active, setActive] = useState("Web");
+
+  useEffect(() => {
+    const tabs = ["Web", "App", "Game"];
+    let index = 0;
+
+    const interval = setInterval(() => {
+      index = (index + 1) % tabs.length;
+      setActive(tabs[index]);
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
 
     <section className="relative min-h-screen bg-[#070B1A] text-white overflow-hidden py-6  md:py-16 sm:py-20">
@@ -33,7 +51,7 @@ export default function Projects() {
       {/* background glow */}
       <div className="absolute inset-0">
         <img
-          src="src/assets/projectbg.png"
+          src={projectBg}
           alt="bg"
           className="w-full h-full object-cover"
         />
@@ -70,20 +88,9 @@ export default function Projects() {
 
             <button
               onClick={() => {
-                setActive("All");
+                setActive("Web");
 
-              }} className={` cursor-pointer relative px-6 py-1 rounded-2xl text-white text-sm sm:text-base font-semibold border border-gray-700 bg-black overflow-hidden 
-          before:absolute before:top-0 before:left-[-100%] before:w-1/2 before:h-full before:bg-gradient-to-r before:from-cyan-400 before:to-purple-600 before:skew-x-12 before:transition-all before:duration-500 
-          hover:before:left-full
-          ${active === "All" ? "bg-gradient-to-r from-black/30 via-pink-700 to-blue-800 animate-gradientShift" : ""}
-        `}
-            >
-              All
-            </button>
-
-            <button
-              onClick={() => { setActive("Web") }}
-              className={` cursor-pointer  relative px-6 py-1 rounded-2xl text-white text-sm sm:text-base font-semibold border border-gray-700 bg-black overflow-hidden 
+              }} className={` relative px-6 py-1 rounded-2xl text-white text-sm sm:text-base font-semibold border border-gray-700 bg-black overflow-hidden 
           before:absolute before:top-0 before:left-[-100%] before:w-1/2 before:h-full before:bg-gradient-to-r before:from-cyan-400 before:to-purple-600 before:skew-x-12 before:transition-all before:duration-500 
           hover:before:left-full
           ${active === "Web" ? "bg-gradient-to-r from-black/30 via-pink-700 to-blue-800 animate-gradientShift" : ""}
@@ -93,14 +100,25 @@ export default function Projects() {
             </button>
 
             <button
-              onClick={() => setActive("App")}
-              className={`cursor-pointer relative px-6 py-1 rounded-2xl text-white text-sm sm:text-base font-semibold border border-gray-700 bg-black overflow-hidden 
+              onClick={() => { setActive("App") }}
+              className={`  relative px-6 py-1 rounded-2xl text-white text-sm sm:text-base font-semibold border border-gray-700 bg-black overflow-hidden 
           before:absolute before:top-0 before:left-[-100%] before:w-1/2 before:h-full before:bg-gradient-to-r before:from-cyan-400 before:to-purple-600 before:skew-x-12 before:transition-all before:duration-500 
           hover:before:left-full
           ${active === "App" ? "bg-gradient-to-r from-black/30 via-pink-700 to-blue-800 animate-gradientShift" : ""}
         `}
             >
               App
+            </button>
+
+            <button
+              onClick={() => setActive("Game")}
+              className={` relative px-6 py-1 rounded-2xl text-white text-sm sm:text-base font-semibold border border-gray-700 bg-black overflow-hidden 
+          before:absolute before:top-0 before:left-[-100%] before:w-1/2 before:h-full before:bg-gradient-to-r before:from-cyan-400 before:to-purple-600 before:skew-x-12 before:transition-all before:duration-500 
+          hover:before:left-full
+          ${active === "Game" ? "bg-gradient-to-r from-black/30 via-pink-700 to-blue-800 animate-gradientShift" : ""}
+        `}
+            >
+              Game
             </button>
 
           </div>
@@ -119,10 +137,10 @@ export default function Projects() {
         >
           {/* Card */}
           {[
-            { img: "portfolio.png", title: "Portfolio Website", tech: "React / TypeScript / Tailwind", category: "Web", link: "", github: "" },
-            { img: "chat.png", title: "Chat Application", tech: "React / Next.js / Socket.io", category: "App", link: "https://chat-vibe-theta.vercel.app", github: "https://github.com/dheeraj-mahara/ChatappFrountend" },
-            { img: "snake.png", title: "Snake Game", tech: "JavaScript / HTML / CSS", category: "Web", link: "https://69d72a6a29518ead87b8c6df--dsnake-leader.netlify.app/", github: "https://github.com/dheeraj-mahara/DheerajMahara" },
-          ].filter(p => active === "All" || p.category === active)
+            { img: portfoiliImg, title: "Portfolio Website", tech: "React / TypeScript / Tailwind", category: "Web", link: "https://dheeraj-portfolio-rosy.vercel.app", github: "https://github.com/dheeraj-mahara/portfolio" },
+            { img: chatAppImg, title: "Chat Application", tech: "React / Next.js / Socket.io", category: "App", link: "https://chat-vibe-theta.vercel.app", github: "https://github.com/dheeraj-mahara/ChatappFrountend" },
+            { img: gameImg, title: "Snake Game", tech: "JavaScript / HTML / CSS", category: "Web", link: "https://69d72a6a29518ead87b8c6df--dsnake-leader.netlify.app", github: "https://github.com/dheeraj-mahara/DheerajMahara" },
+          ]
             .map((project, i) => (
 
               <motion.div
@@ -145,7 +163,7 @@ export default function Projects() {
                 >                <motion.img
                     whileHover={{ scale: 1.08 }}
                     transition={{ duration: 0.4 }}
-                    src={`src/assets/${project.img}`}
+                    src={`${project.img}`}
                     alt="project"
                     className="rounded-xl mb-4 border-2 border-black w-full max-w-lg mx-auto h-auto object-contain"
                   />

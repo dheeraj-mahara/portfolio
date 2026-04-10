@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import footerBg from "../assets/footerbg.png";
 
 const footerVariant = {
   hidden: { opacity: 0, y: 80 },
@@ -20,9 +21,21 @@ const itemVariant = {
 };
 
 export default function Footer() {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState<number>(0);
   const [hover, setHover] = useState(0);
 
+    useEffect(() => {
+    const savedRating = localStorage.getItem("portfolioRating");
+    if (savedRating) {
+      setRating(Number(savedRating));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (rating > 0) {
+      localStorage.setItem("portfolioRating", rating.toString());
+    }
+  }, [rating]);
   return (
     <footer
 
@@ -30,7 +43,7 @@ export default function Footer() {
     >
       <div className="absolute inset-0">
         <img
-          src="src/assets/footerbg.png"
+          src={footerBg}
           alt="bg"
           className="w-full h-full object-cover"
         />
@@ -47,21 +60,22 @@ export default function Footer() {
         {/* TOP SECTION */}
         <motion.div
           variants={itemVariant}
-          className="flex flex-col md:flex-row justify-between items-center gap-8 border-t border-white/10 pt-2"
+          className="flex flex-col md:flex-row justify-between items-center gap-8 bor
+          er-t border-white/10 pt-2"
         >
           {/* LEFT */}
           <div className="text-center md:text-left">
             <h2 className="text-xl font-semibold tracking-wide">
               Dheeraj Mahara
             </h2>
-            <p className="text-sm text-gray-400 mt-2">
+            <p className="text-sm text-gray-300 mt-2">
               Thanks for visiting my portfolio
             </p>
           </div>
 
           {/* RATING */}
-          <div className="text-center">
-            <p className="text-sm mb-2 text-gray-300">
+          <div className=" md:pb-0 pb-3 pr-0 md:pr-20 text-center">
+            <p className="text-sm  text-gray-300">
               Rate my portfolio
             </p>
 
@@ -88,7 +102,7 @@ export default function Footer() {
             </div>
 
             <p
-              className={`text-xs text-gray-400 mt-1  transition-opacity duration-300 ${rating > 0 ? "opacity-100" : "opacity-0"
+              className={`text-xs text-gray-300 mt-1  transition-opacity duration-300 ${rating > 0 ? "opacity-100" : "opacity-0"
                 }`}
             >
               Thanks for rating {rating} ⭐
@@ -102,7 +116,7 @@ export default function Footer() {
         {/* BOTTOM */}
         <motion.div
           variants={itemVariant}
-          className="text-center text-gray-500 text-sm mt-2"
+          className="text-center text-pink-200/80  text-sm mt-2"
         >          © {new Date().getFullYear()} Dheeraj Mahara • Built with React & Tailwind
         </motion.div>
 
