@@ -3,6 +3,8 @@ import { MdEmail, MdLocationOn } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
 import contectBg from "../assets/contectbg.png";
 import heroImg from "../assets/hero.png";
+import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 import { motion } from "framer-motion";
 const formContainer = {
@@ -30,11 +32,118 @@ const rightCard = {
 };
 
 const Contact = () => {
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+    });
+    const [errors, setErrors] = useState({
+        name: false,
+        email: false,
+        subject: false,
+        message: false
+    });
 
+    const [loading, setLoading] = useState(false);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const resetShake = () => {
+        setTimeout(() => {
+            setErrors({
+                name: false,
+                email: false,
+                subject: false,
+                message: false
+            });
+        }, 400);
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+setLoading(true)
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // NAME
+        if (!formData.name.trim()) {
+            setErrors({ name: true, email: false, subject: false, message: false });
+            toast.error("Name is required");
+            resetShake();
+            return;
+        }
+
+        // EMAIL EMPTY
+        if (!formData.email.trim()) {
+            setErrors({ name: false, email: true, subject: false, message: false });
+            toast.error("Email is required");
+            resetShake();
+            return;
+        }
+
+        // EMAIL INVALID
+        if (!emailRegex.test(formData.email)) {
+            setErrors({ name: false, email: true, subject: false, message: false });
+            toast.error("Invalid email address");
+            resetShake();
+            return;
+        }
+
+        // SUBJECT
+        if (!formData.subject.trim()) {
+            setErrors({ name: false, email: false, subject: true, message: false });
+            toast.error("Subject is required");
+            resetShake();
+            return;
+        }
+
+        // MESSAGE
+        if (!formData.message.trim()) {
+            setErrors({ name: false, email: false, subject: false, message: true });
+            toast.error("Message is required");
+            resetShake();
+            return;
+        }
+
+
+        try {
+            const res = await fetch("https://formspree.io/f/xqegreek", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (res.ok) {
+                toast.success("Message sent successfully ");
+console.log(formData);
+
+                setFormData({
+                    name: "",
+                    email: "",
+                    subject: "",
+                    message: ""
+                });
+            } else {
+                toast.error("Something went wrong ❌");
+            }
+        } catch {
+            toast.error("Network error ⚠️");
+        } finally{
+            setLoading(false);
+        }
+    };
 
     return (
         <section className="relative min-h-screen bg-[#070B1A] text-white overflow-hidden py-5 md:py-6 pb-13 md:py-4 sm:py-20">
-
+            <Toaster position="top-right" />
             <div className="absolute inset-0">
                 <img
                     src={contectBg}
@@ -73,29 +182,40 @@ const Contact = () => {
 
 
 
+
                         <motion.input
                             variants={formItem}
-                            type="text"
+
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
                             placeholder="Your Name"
-                            className="rainbow-border w-full mb-4 p-3 rounded-lg bg-white/10 border  border-sky-300/40 outline-none shadow-[0_0_5px_rgba(56,189,248,0.6)] focus:shadow-[0_0_10px_rgba(56,189,248,0.8),0_0_3px_rgba(255,255,255,0.4)] transition"
-                        />
-
-
+                            className={`rainbow-border w-full mb-4 p-3 rounded-lg 
+${errors.name ? "shake border-red-500 shadow-[0_0_8px_rgba(239,68,68,0.7)]" : "border-sky-300/40"}
+bg-white/10 border outline-none transition-all duration-300`} />
 
                         <motion.input
                             variants={formItem}
-                            type="email"
+
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             placeholder="Your Email"
-                            className="rainbow-border w-full mb-4 p-3 rounded-lg bg-white/10 border  border-sky-300/40 outline-none shadow-[0_0_5px_rgba(56,189,248,0.6)] focus:shadow-[0_0_10px_rgba(56,189,248,0.8),0_0_3px_rgba(255,255,255,0.4)] transition"
+                            className={`rainbow-border w-full mb-4 p-3 rounded-lg 
+${errors.email ? "shake border-red-500 shadow-[0_0_8px_rgba(239,68,68,0.7)]" : "border-sky-300/40"}
+bg-white/10 border outline-none transition-all duration-300`}
                         />
-
-
 
                         <motion.input
                             variants={formItem}
-                            type="text"
+
+                            name="subject"
+                            value={formData.subject}
+                            onChange={handleChange}
                             placeholder="Subject"
-                            className=" rainbow-border w-full mb-4 p-3 rounded-lg bg-white/10 border border-sky-300/40 outline-none shadow-[0_0_5px_rgba(56,189,248,0.6)] focus:shadow-[0_0_10px_rgba(56,189,248,0.8),0_0_3px_rgba(255,255,255,0.4)] transition"
+                            className={`rainbow-border w-full mb-4 p-3 rounded-lg 
+${errors.subject ? "shake border-red-500 shadow-[0_0_8px_rgba(239,68,68,0.7)]" : "border-sky-300/40"}
+bg-white/10 border outline-none transition-all duration-300`}
                         />
 
 
@@ -104,35 +224,52 @@ const Contact = () => {
 
                         <motion.textarea
                             variants={formItem}
-
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
                             placeholder="Message"
-                            className=" rainbow-border w-full mb-4 p-3 rounded-lg bg-white/10 border  border-sky-300/40 outline-none shadow-[0_0_5px_rgba(56,189,248,0.6)] focus:shadow-[0_0_10px_rgba(56,189,248,0.8),0_0_3px_rgba(255,255,255,0.4)] transition"
-                        ></motion.textarea>
+                            className={`rainbow-border w-full mb-4 p-3 rounded-lg 
+${errors.message ? "shake border-red-500 shadow-[0_0_8px_rgba(239,68,68,0.7)]" : "border-sky-300/40"}
+bg-white/10 border outline-none transition-all duration-300`}                        ></motion.textarea>
 
 
 
 
 
 
-                        <motion.button
-                            variants={formItem}
-                            className="button-animated cursor-pointer relative w-full py-3 px-6 font-bold text-white rounded-xl overflow-hidden group shadow-lg transition-all duration-200 
-             active:scale-95 active:shadow-inner active:duration-150"
-                        >
-                            <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-700 blur-2xl opacity-90 transition-all duration-500 group-hover:scale-125 group-hover:opacity-100 animate-gradient"></span>
+                       <motion.button
+  onClick={handleSubmit}
+  type="submit"
+  disabled={loading}
+  variants={formItem}
+  className="button-animated cursor-pointer relative w-full py-3 px-6 text-lg font-bold text-white rounded-2xl overflow-hidden group shadow-xl transition-all duration-200 
+  active:scale-95 active:shadow-inner active:duration-150
+  disabled:opacity-70 disabled:cursor-not-allowed"
+>
+  {/* gradient bg */}
+  <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-700 blur-2xl opacity-90 transition-all duration-500 group-hover:scale-125 group-hover:opacity-100 animate-gradient"></span>
 
-                            {/* Button text */}
-                            <span className="relative z-10">Send Message</span>
+  {/* content */}
+  <span className="relative z-10 flex items-center justify-center gap-2">
+    {loading ? (
+      <>
+        <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+        Sending...
+      </>
+    ) : (
+      "Send Message"
+    )}
+  </span>
 
-                            {/* Left shine */}
-                            <span className="absolute -left-32 top-0 w-24 h-full bg-white/30 rounded-full opacity-0 transform -rotate-12 translate-x-0 group-hover:translate-x-160 group-hover:opacity-90 transition-all duration-900 ease-in-out blur-md"></span>
+  {/* shine left */}
+  <span className="absolute -left-32 top-0 w-24 h-full bg-white/30 rounded-full opacity-0 transform -rotate-12 translate-x-0 group-hover:translate-x-160 group-hover:opacity-90 transition-all duration-900 ease-in-out blur-md"></span>
 
-                            {/* Right shine */}
-                            <span className="absolute -right-32 top-0 w-24 h-full bg-white/30 rounded-full opacity-0 transform -rotate-12 translate-x-0 group-hover:-translate-x-160 group-hover:opacity-90 transition-all duration-900 ease-in-out blur-md"></span>
+  {/* shine right */}
+  <span className="absolute -right-32 top-0 w-24 h-full bg-white/30 rounded-full opacity-0 transform -rotate-12 translate-x-0 group-hover:-translate-x-160 group-hover:opacity-90 transition-all duration-900 ease-in-out blur-md"></span>
 
-                            {/* Inner border */}
-                            <span className="absolute inset-0 rounded-xl border border-white/10 shadow-inner pointer-events-none"></span>
-                        </motion.button>
+  {/* border */}
+  <span className="absolute inset-0 rounded-2xl border border-white/10 shadow-inner pointer-events-none"></span>
+</motion.button>
 
 
                     </motion.div>
@@ -149,7 +286,7 @@ const Contact = () => {
                             src={heroImg}
                             alt="avatar"
                             className="w-60 h-60 object-contain md:block hidden shadow-md"
-                           
+
                         />
 
                         {/* Content */}
