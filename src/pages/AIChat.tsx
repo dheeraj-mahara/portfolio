@@ -232,6 +232,36 @@ export default function AIChat() {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
+    useEffect(() => {
+    if (!open) return;
+
+    // Add a fake history entry when chat opens
+    window.history.pushState({ chatOpen: true }, "");
+
+    const onPopState = () => {
+        // Instead of going back route, just close chat
+        setOpen(false);
+    };
+
+    window.addEventListener("popstate", onPopState);
+
+    return () => {
+        window.removeEventListener("popstate", onPopState);
+    };
+}, [open]);
+
+const toggleChat = () => {
+    setOpen((prev) => {
+        const newState = !prev;
+
+        if (newState) {
+            window.history.pushState({ chatOpen: true }, "");
+        }
+
+        return newState;
+    });
+};
+
     return (
         <div className="fixed  bottom-18 md:bottom-6 right-6 z-50">
 
@@ -307,7 +337,7 @@ export default function AIChat() {
 
             {/* FLOATING BUTTON */}
             <button
-                onClick={() => setOpen(!open)}
+    onClick={toggleChat}
                 className=" relative w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-full flex items-center justify-center text-white text-3xl sm:text-[26px]
                 bg-gradient-to-br from-pink-500 via-violet-500 to-indigo-500 bg-[length:200%_200%]
 
