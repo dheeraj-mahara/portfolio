@@ -217,29 +217,42 @@ const Home = () => {
                 <motion.div
                     variants={item}
                     className="flex flex-col md:w-[40%] justify-center md:justify-start relative"
-                >                    <div className="absolute w-[350px] h-[350px] bg-pink-500 blur-[120px] opacity-20"></div>
-                    <div className="absolute w-[250px] h-[250px] bg-blue-500 blur-[120px] opacity-20"></div>
+                >
+                    {/* Background blur (fix click issue) */}
+                    <div className="absolute w-[350px] h-[350px] bg-pink-500 blur-[120px] opacity-20 pointer-events-none"></div>
+                    <div className="absolute w-[250px] h-[250px] bg-blue-500 blur-[120px] opacity-20 pointer-events-none"></div>
 
+                    {/* Image */}
                     <motion.img
                         src={heroImg}
                         alt="hero"
-                        className="w-full max-w-[500px] h-auto object-contain"
+                        className="w-full max-w-[500px] h-auto object-contain relative z-10"
                         initial={{ y: 20 }}
                         animate={{ y: -20 }}
                         transition={{
                             repeat: Infinity,
                             repeatType: "reverse",
-                            duration: 2
+                            duration: 2,
                         }}
                     />
-                    <div className="md:hidden flex text-sm sm:flex-row gap-6 justify-center md:justify-start pt-4 mt-2">
-                        <button className="bg-gradient-to-r from-sky-600 to-indigo-500 px-7 py-2 rounded-xl font-medium shadow-lg hover:scale-105 hover:shadow-blue-500/30 transition duration-300">
-                            View Projects
-                        </button>
 
-                        <button className="px-7 py-2 rounded-xl font-medium bg-gray-700 hover:bg-gray-800 hover:scale-105 transition duration-300">
+                    {/* Buttons */}
+                    <div className="md:hidden flex text-sm sm:flex-row gap-6 justify-center pt-4 mt-2 relative z-20">
+
+                        <a
+                            href="#projects"
+                            className="bg-gradient-to-r from-sky-600 to-indigo-500 px-7 py-2 rounded-xl font-medium shadow-lg hover:scale-105 hover:shadow-blue-500/30 transition duration-300 inline-block text-white"
+                        >
+                            View Projects
+                        </a>
+
+                        <a
+                            href="#contact"
+                            className="px-7 py-2 rounded-xl font-medium bg-gray-700 hover:bg-gray-800 hover:scale-105 transition duration-300 inline-block text-white"
+                        >
                             Contact Me
-                        </button>
+                        </a>
+
                     </div>
                 </motion.div>
 
