@@ -1,4 +1,4 @@
-import { FaReact, FaJs, FaNodeJs, FaGitAlt, FaGithub, FaPaintBrush, FaSketch } from "react-icons/fa";
+import { FaReact, FaJs, FaNodeJs, FaGitAlt, FaGithub, FaPaintBrush, FaSketch, FaServer } from "react-icons/fa";
 import { SiTailwindcss, SiTypescript, SiExpress, SiMongodb, SiSocketdotio, SiMysql, SiFigma, } from "react-icons/si";
 import frountendImg from "../assets/frountend.png";
 import backendImg from "../assets/backend.png";
@@ -45,7 +45,7 @@ export default function Skill() {
         { name: "Tailwind", icon: <SiTailwindcss className="text-sky-400" /> },
         { name: "TypeScript", icon: <SiTypescript className="text-blue-500" /> },
         { name: "React", icon: <FaReact className="text-cyan-400" /> },
-        { name: "Redux", icon: <FaReact className="text-purple-500" /> },
+        { name: "REST API", icon: <FaServer className="text-green-400" /> },
         { name: "JavaScript", icon: <FaJs className="text-yellow-400" /> },
     ];
 

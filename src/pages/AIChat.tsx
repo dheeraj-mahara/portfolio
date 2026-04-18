@@ -50,161 +50,208 @@ export default function AIChat() {
         };
     }, [open]);
 
-  const random = (arr: string[]) => {
+const random = (arr: string[]): string => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
 
- const reply = (msg: string): string => {
-  msg = msg.toLowerCase();
+const includesAny = (msg: string, words: string[]) => {
+  return words.some(word => msg.includes(word));
+};
+
+ const reply = (message: string): string => {
+  const msg = message.toLowerCase().trim();
 
   // greetings
-  if (msg.includes("hi") || msg.includes("hello")) {
+  if (includesAny(msg, ["hi", "hello", "hey", "hii"])) {
     return random([
       "Hey there 👋 How can I help you with Dheeraj?",
       "Hello! 😊 Want to know about Dheeraj skills or projects?",
       "Hi 👋 Ask me anything about Dheeraj!",
-      "Hey! I'm here to help you explore Dheeraj's work 🚀"
+      "Hey! I'm here to help you explore Dheeraj's work 🚀",
+      "Welcome 👋 Need info about Dheeraj?"
     ]);
   }
 
-  // intro
-  if (msg.includes("who") || msg.includes("you")) {
+  // who are you
+  if (includesAny(msg, ["who are you", "who", "yourself"])) {
     return random([
-      "I'm Dheeraj's AI assistant 🤖 I can guide you through his portfolio.",
-      "You can think of me as Dheeraj's digital assistant 😄",
-      "I help you explore Dheeraj’s skills, projects & contact info!"
+      "I'm Dheeraj's AI assistant 🤖",
+      "I help you explore Dheeraj’s portfolio",
+      "Your friendly portfolio guide 😄",
+      "I'm built to showcase Dheeraj's work 🚀"
     ]);
   }
 
-  if (msg.includes("name")) {
+  // name
+  if (includesAny(msg, ["name", "developer"])) {
     return random([
-      "His name is Dheeraj — a frontend developer 💻",
-      "You're looking at Dheeraj's portfolio 😎",
-      "Dheeraj is the developer behind this site!"
+      "His name is Dheeraj — frontend developer 💻",
+      "Dheeraj built this portfolio 😎",
+      "You're exploring Dheeraj's work"
     ]);
   }
 
-  if (msg.includes("about")) {
+  // about
+  if (includesAny(msg, ["about", "yourself", "bio"])) {
     return random([
-      "Dheeraj is a React developer who loves building modern UIs ✨",
-      "He enjoys creating clean and interactive web apps using React ⚛️",
-      "Frontend is his playground 😄 especially with React & Tailwind!"
+      "Dheeraj is a React developer ⚛️",
+      "He builds modern UI with Tailwind & TS",
+      "Frontend is his playground 😄",
+      "He loves creating interactive web apps"
     ]);
   }
 
-  if (msg.includes("education") || msg.includes("study")) {
+  // education
+  if (includesAny(msg, ["education", "study", "college", "bca"])) {
     return random([
       "He is currently pursuing BCA 🎓",
-      "Dheeraj is studying BCA and learning full stack development 🚀",
-      "Along with BCA, he's sharpening his dev skills daily 💪"
+      "BCA student + full stack learner 🚀",
+      "Studying BCA and building projects 💪"
     ]);
   }
 
-  if (msg.includes("location") || msg.includes("where")) {
+  // location
+  if (includesAny(msg, ["location", "where", "country"])) {
     return random([
       "He's based in India 🇮🇳",
-      "Dheeraj works from India 🌍",
-      "Currently located in India."
+      "Working from India 🌍",
+      "Located in India"
     ]);
   }
 
   // skills
-  if (msg.includes("skill") || msg.includes("technology")) {
+  if (includesAny(msg, ["skill", "technology", "stack"])) {
     return random([
-      "React, TypeScript, Tailwind, JavaScript, Git, Node, Express 🚀",
-      "His stack includes React , TS, Tailwind ,Express & Node.js",
-      "Frontend + Backend basics: React, TS, Tailwind, Node 🔥"
+      "React, TypeScript, Tailwind, Node, Express 🚀",
+      "Frontend + Backend  🔥",
+      "Modern stack: React + TS + Node"
     ]);
   }
 
-  if (msg.includes("frontend")) {
+  // frontend
+  if (includesAny(msg, ["frontend", "ui"])) {
     return random([
-      "Frontend: React, Tailwind CSS, TypeScript ⚛️",
-      "He builds UI using React + Tailwind 🎨",
-      "Frontend is powered by React & modern tools 🚀"
+      "React + Tailwind UI builder ⚛️",
+      "He focuses on frontend development 🎨",
+      "Modern UI using React"
     ]);
   }
 
-  if (msg.includes("backend")) {
+  // backend
+  if (includesAny(msg, ["backend", "server", "node"])) {
     return random([
-      "Backend: Node.js 🌐",
-      "He uses Node.js for backend basics ⚙️",
-      "Server-side? Node.js is his go-to 🔧"
+      "Backend: Node.js & Express ⚙️",
+      "Basic backend with REST APIs 🌐",
+      "Server-side using Node"
+    ]);
+  }
+
+  // database
+  if (includesAny(msg, ["database", "mongo", "mongodb"])) {
+    return random([
+      "He uses MongoDB , SQL🍃",
+      "Database: MongoDB , SQL",
+      "MongoDB for storing chat data"
     ]);
   }
 
   // projects
-  if (msg.includes("project")) {
+  if (includesAny(msg, ["project", "work"])) {
     return random([
-      "He built a Portfolio, Chat App, Snake Game & AI Chat UI 🧠",
-      "Projects include chat apps, games & modern UI builds 🎮",
-      "Some cool stuff: AI Chat UI, Portfolio & more 🚀"
+      "Portfolio, Chat App, Snake Game & AI Chat 🤖",
+      "Multiple React based projects 🚀",
+      "Full stack chat application 🔥"
     ]);
   }
 
-  if (msg.includes("chat")) {
+  // chat
+  if (includesAny(msg, ["chat", "ai chat", "bot"])) {
     return random([
-      "He created a custom AI chat widget with animations 🤖",
-      "That chat UI you're seeing? He built it himself 😎",
-      "It includes animations + local storage support 🔥"
+      "Custom AI chat widget built by him 🤖",
+      "This chat is built using React",
+      "Includes animations + smart replies"
     ]);
   }
 
   // contact
-  if (msg.includes("contact") || msg.includes("email")) {
+  if (includesAny(msg, ["contact", "email", "mail"])) {
     return random([
-      "You can reach him at: dheeraj@email.com 📩",
-      "Drop a mail here: dheeraj@email.com",
-      "Email: dheeraj@email.com ✉️"
+      "You can reach him at: mehradheeraj314@gmail.com 📩",
+      "Drop a mail here: mehradheeraj314@gmail.com",
+      "Email available in contact section"
     ]);
   }
 
-  if (msg.includes("linkedin")) {
+  // linkedin
+  if (includesAny(msg, ["linkedin"])) {
     return random([
-      "Here's his LinkedIn: linkedin.com/in/dheeraj-mahara-1342b6363 🔗",
-      "Connect with him on LinkedIn 💼 linkedin.com/in/dheeraj-mahara-1342b6363",
-      "LinkedIn profile 👉 linkedin.com/in/dheeraj-mahara-1342b6363"
+      "linkedin.com/in/dheeraj-mahara-1342b6363 💼",
+      "Connect on LinkedIn 🔗",
+      "LinkedIn profile available"
     ]);
   }
 
-  if (msg.includes("github")) {
+  // github
+  if (includesAny(msg, ["github", "code"])) {
     return random([
-      "Check his GitHub: github.com/dheeraj-mahara 💻",
-      "His code lives here 👉 github.com/dheeraj-mahara",
-      "GitHub: github.com/dheeraj-mahara 🚀"
+      "github.com/dheeraj-mahara 💻",
+      "Check his repositories 🚀",
+      "All projects on GitHub"
     ]);
   }
 
-  if (msg.includes("resume") || msg.includes("cv")) {
+  // resume
+  if (includesAny(msg, ["resume", "cv"])) {
     return random([
-      "You can download his resume from the Resume section 📄",
-      "Resume is available on the site 👍",
-      "Check the Resume section to download it!"
+      "Resume available on portfolio 📄",
+      "Download CV from resume section",
+      "Resume ready for download"
     ]);
   }
 
-  if (msg.includes("experience")) {
+  // experience
+  if (includesAny(msg, ["experience", "fresher"])) {
     return random([
-      "He's a fresher but has strong hands-on projects 💪",
-      "Currently building experience through real-world projects 🚀",
-      "Fresher with solid project experience 🔥"
+      "Fresher with strong projects 💪",
+      "Hands-on full stack projects",
+      "Learning through real-world apps"
     ]);
   }
 
-  if (msg.includes("hire") || msg.includes("work")) {
+  // hire
+  if (includesAny(msg, ["hire", "job", "freelance"])) {
     return random([
-      "Yes! He's open for freelance & junior roles 💼",
-      "Available for work 🚀 Let's connect!",
-      "You can hire him for frontend projects 😄"
+      "Open for work 💼",
+      "Available for frontend roles",
+      "You can hire him 🚀"
+    ]);
+  }
+
+  // thanks
+  if (includesAny(msg, ["thanks", "thank you"])) {
+    return random([
+      "You're welcome 😄",
+      "Happy to help!",
+      "Anytime 👍"
+    ]);
+  }
+
+  // bye
+  if (includesAny(msg, ["bye", "goodbye"])) {
+    return random([
+      "Bye 👋",
+      "See you soon!",
+      "Have a great day 😄"
     ]);
   }
 
   // fallback
   return random([
-    "Hmm 🤔 try asking about Dheeraj's skills, projects, or contact!",
-    "I didn’t get that 😅 maybe ask about his work or skills?",
-    "Try something like 'projects' or 'skills' 😉",
-    "I'm still learning 😄 ask me about Dheeraj's portfolio!"
+    "Try asking about skills, projects, or contact 😉",
+    "I'm still learning 🤖",
+    "Ask about Dheeraj's portfolio",
+    "Didn't get that 😅",
+    "Try 'skills' or 'projects'"
   ]);
 };
 
