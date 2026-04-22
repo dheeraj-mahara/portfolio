@@ -67,7 +67,7 @@ const Contact = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-setLoading(true)
+
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -113,6 +113,7 @@ setLoading(true)
 
 
         try {
+            setLoading(true)
             const res = await fetch("https://formspree.io/f/xqegreek", {
                 method: "POST",
                 headers: {
