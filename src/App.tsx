@@ -1,3 +1,4 @@
+import GlitterCursor from "./GlitterCursor"
 import About from "./pages/About"
 import AIChat from "./pages/AIChat"
 import Contact from "./pages/Contact"
@@ -12,6 +13,8 @@ function App() {
 
   return (
     <div>
+    
+      <GlitterCursor/>
       <Nav />
       <section id="home">
         <Home />
@@ -29,7 +32,7 @@ function App() {
         <Contact />
       </section>
       <FooterNav />
-      <Footer/>
+      <Footer />
       <AIChat />
     </div>
 
