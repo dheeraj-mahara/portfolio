@@ -139,10 +139,11 @@ export default function Projects() {
         >
           {/* Card */}
           {[
-            { img: portfoiliImg, title: "Portfolio Website", tech: "React / TypeScript / Tailwind", category: "Web", link: "https://dheeraj-portfolio-rosy.vercel.app", github: "https://github.com/dheeraj-mahara/portfolio" },
-            { img: chatAppImg, title: "Chat Application", tech: "React / Next.js / Socket.io ", category: "App", link: "https://chat-vibe-theta.vercel.app", github: "https://github.com/dheeraj-mahara/ChatappFrountend" },
-            { img: gameImg, title: "Snake Game", tech: "JavaScript / HTML / CSS", category: "Web", link: "https://69d72a6a29518ead87b8c6df--dsnake-leader.netlify.app", github: "https://github.com/dheeraj-mahara/DheerajMahara" },
-            { img: kiddo, title: "Kid's Game", tech: "Next.js / TypeScript / Tailwind CSS ", category: "Web", link: "https://kiddo-omega.vercel.app/", github: "https://github.com/dheeraj-mahara/kids-learning-app" , panding:true },
+            { img: portfoiliImg, title: "Portfolio Website", tech: "React / TypeScript / Tailwind", category: "Web", link: "https://dheeraj-portfolio-rosy.vercel.app", github: "https://github.com/dheeraj-mahara/portfolio", pending: false },
+            { img: chatAppImg, title: "Chat Application", tech: "React / Next.js / Socket.io ", category: "App", link: "https://chat-vibe-theta.vercel.app", github: "https://github.com/dheeraj-mahara/ChatappFrountend", pending: false },
+            { img: gameImg, title: "Snake Game", tech: "JavaScript / HTML / CSS", category: "Web", link: "https://69d72a6a29518ead87b8c6df--dsnake-leader.netlify.app", github: "https://github.com/dheeraj-mahara/DheerajMahara", pending: false },
+
+            { img: kiddo, title: "Kid's Game", tech: "Next.js / TypeScript / Tailwind CSS ", category: "Web", link: "https://kiddo-omega.vercel.app/", github: "https://github.com/dheeraj-mahara/kids-learning-app", pending: false },
             {
               img: serviceHub,
               title: "ServiceHub",
@@ -150,6 +151,7 @@ export default function Projects() {
               category: "Full Stack",
               link: "https://your-project-link.com",
               github: "https://github.com/your-github",
+              pending: true,
             }
           ]
             .map((project, i) => (
@@ -191,35 +193,35 @@ export default function Projects() {
 
                   <div className="flex justify-center flex-wrap gap-6 mt-8">
 
-{project.panding ? (
-<>
-                    <button
-                      onClick={() => window.open(project.link, "_blank")} // opens the project link in a new tab
-                      className="cursor-pointer relative w-[40%] py-1 px-4 rounded-lg text-white text-sm bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 overflow-hidden group"
-                    >
-                      <span className="relative z-10 transition-colors duration-300 group-hover:text-yellow-300">
-                        Live Demo
-                      </span>
-                      <span className="absolute inset-0 bg-white/10 rounded-xl scale-0 group-hover:scale-150 transition-transform duration-500 origin-center"></span>
-                      <span className="absolute -left-62 top-0 w-62 h-full bg-gradient-to-r from-yellow-300 via-white/50 to-yellow-300 opacity-30 transform -skew-x-12 translate-x-0 group-hover:translate-x-96 transition-transform duration-700"></span>
-                    </button>
-                    {/* Github Button */}
-                    <button
-                      onClick={() => window.open(project.github, "_blank")}
-                      className="cursor-pointer relative w-[40%] py-1 px-4 rounded-lg text-white text-sm bg-gray-900 border border-gray-700 overflow-hidden group"
-                    >
-                      <span className="relative z-10 transition-colors duration-300 group-hover:text-green-400">
-                        Github
-                      </span>
-                      <span className="absolute inset-0 bg-white/5 rounded-xl scale-0 group-hover:scale-150 transition-transform duration-500 origin-center"></span>
-                      <span className="absolute -left-62 top-0 w-62 h-full bg-gradient-to-r from-green-400 via-white/50 to-green-400 opacity-20 transform -skew-x-12 translate-x-0 group-hover:translate-x-96 transition-transform duration-700"></span>
-                    </button>
-                    </>
+                    {project.pending == false ? (
+                      <>
+                        <button
+                          onClick={() => window.open(project.link, "_blank")} // opens the project link in a new tab
+                          className="cursor-pointer relative w-[40%] py-1 px-4 rounded-lg text-white text-sm bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 overflow-hidden group"
+                        >
+                          <span className="relative z-10 transition-colors duration-300 group-hover:text-yellow-300">
+                            Live Demo
+                          </span>
+                          <span className="absolute inset-0 bg-white/10 rounded-xl scale-0 group-hover:scale-150 transition-transform duration-500 origin-center"></span>
+                          <span className="absolute -left-62 top-0 w-62 h-full bg-gradient-to-r from-yellow-300 via-white/50 to-yellow-300 opacity-30 transform -skew-x-12 translate-x-0 group-hover:translate-x-96 transition-transform duration-700"></span>
+                        </button>
+                        {/* Github Button */}
+                        <button
+                          onClick={() => window.open(project.github, "_blank")}
+                          className="cursor-pointer relative w-[40%] py-1 px-4 rounded-lg text-white text-sm bg-gray-900 border border-gray-700 overflow-hidden group"
+                        >
+                          <span className="relative z-10 transition-colors duration-300 group-hover:text-green-400">
+                            Github
+                          </span>
+                          <span className="absolute inset-0 bg-white/5 rounded-xl scale-0 group-hover:scale-150 transition-transform duration-500 origin-center"></span>
+                          <span className="absolute -left-62 top-0 w-62 h-full bg-gradient-to-r from-green-400 via-white/50 to-green-400 opacity-20 transform -skew-x-12 translate-x-0 group-hover:translate-x-96 transition-transform duration-700"></span>
+                        </button>
+                      </>
 
-):(
-<p className="text-1xl  font-extrabold text-orange-300 tracking-wide">
-  Ongoing Project
-</p>)}
+                    ) : (
+                      <p className=" font-extrabold text-orange-300 tracking-wider ">
+                        Currently Building
+                      </p>)}
 
 
 
